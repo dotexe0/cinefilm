@@ -25,7 +25,7 @@ function displaySearchData(data){
 
 function watchSubmit(){
   $('.js-search-form').submit(function(event){
-    $('js-search-results').empty();
+    $('.js-search-results').empty();
     event.preventDefault();
     var query = $(this).find('.js-query').val();
     getDataFromApi(query, displaySearchData);
