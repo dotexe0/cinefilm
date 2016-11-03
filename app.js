@@ -1,29 +1,23 @@
-var TASTE_KID_API_KEY = '246618-movieagg-S4Y1KTWA';
-var TASTE_KID_BASE_URL = 'https://www.tastekid.com/api/similar';
+// var TASTE_KID_API_KEY = '246618-movieagg-S4Y1KTWA';
+// var TASTE_KID_BASE_URL = 'https://www.tastekid.com/api/similar';
 var GUIDE_BOX_API_KEY = 'rKGb7Oh50TpEuVG55ENiKRKUxCBmrYVd';
-var GUIDE_BOX_BASE_URL = 'http://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY;
-
+var GUIDE_BOX_BASE_URL = 'http://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/search/movie/title/';
+var IMDB_URL = 'http://imdb.com/title/';
 function getDataFromApi(searchTerm, callback) {
-    var query = {
-      part: 'snippet',
-      key: API_KEY,
-      q: searchTerm
-    };
-    $.getJSON(YT_BASE_URL, query, callback)
+    var query = GUIDE_BOX_BASE_URL + searchTerm + '/fuzzy';
+    $.getJSON(query, callback)
 };
 
-function displayYTSearchData(data){
+function displaySearchData(data){
   var resultElement = '';
   console.log(data);
-  if (data.items) {
-    data.items.forEach(function(item) {
-      if(item.id.kind === 'youtube#video'){
-        resultElement += '<p><a target="_blank" href="https://www.youtube.com/embed/' + item.id.videoId + '">' +
-        "<img src=" + item.snippet.thumbnails.medium.url + ">"+ '<p>';
-      }
+  if (data.results) {
+    data.results.forEach(function(item) {
+        resultElement += '<p>' +
+        "<img src=" + item.poster_240x342 + ">"+ '<p>';
     });
 
-  }else{
+  } else {
     resultElement += '<p> no results <p>';
   }
   $('.js-search-results').append(resultElement)
@@ -31,9 +25,10 @@ function displayYTSearchData(data){
 
 function watchSubmit(){
   $('.js-search-form').submit(function(event){
+    $('js-search-results').empty();
     event.preventDefault();
     var query = $(this).find('.js-query').val();
-    getDataFromApi(query, displayYTSearchData);
+    getDataFromApi(query, displaySearchData);
   });
 }
 
