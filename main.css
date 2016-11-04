@@ -1,0 +1,11 @@
+html {
+  background-color: #F3F3F3;
+  text-align: center;
+}
+
+.js-search-results img{
+  align-items: center;
+  display: inline;
+  padding: 10px;
+  border-radius: 10%;
+}
