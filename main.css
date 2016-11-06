@@ -9,3 +9,7 @@ html {
   padding: 10px;
   border-radius: 10%;
 }
+
+
+.featherlight({iframe: 'index.html', iframeMaxWidth: '80%', iframeWidth: 560,
+    iframeHeight: 315});
