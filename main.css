@@ -11,5 +11,12 @@ html {
 }
 
 
-.featherlight({iframe: 'index.html', iframeMaxWidth: '80%', iframeWidth: 560,
-    iframeHeight: 315});
+.featherlight {
+  iframe: 'index.html'; iframeMaxWidth: '80%';
+   iframeWidth: 560px;
+    iframeHeight: 315px;
+};
+.featherlight-content {
+  width: 600px;
+  height: 300px;
+}
