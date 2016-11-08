@@ -3,14 +3,47 @@ html {
   text-align: center;
 }
 
-.js-search-results img{
+img {
+
+}
+.movieCard {
   align-items: center;
   display: inline;
   padding: 10px;
   border-radius: 10%;
+  margin-left: 5px;
+  margin-right: 5px;
+  background: rgba(29, 106, 154, 0.72);
+}
+.js-search-results {
+  position: relative;
 }
 
+.active {
+  position: absolute;
+  left: 300;
+}
 
+.description {
+  color: white;
+  position: absolute;
+  top: 10px;
+  left: 100px;
+  height: 342px;
+  width: 800px;
+  background-color: black;
+  border-top-right-radius: 10%;
+  border-bottom-right-radius: 10%;
+}
+
+.description textarea {
+  right: 0px;
+}
+
+.js-search-form {
+  margin-bottom: 20px;
+}
+/*
 .featherlight {
   iframe: 'index.html'; iframeMaxWidth: '80%';
    iframeWidth: 560px;
@@ -19,4 +52,32 @@ html {
 .featherlight-content {
   width: 600px;
   height: 300px;
+}*/
+
+.imgWrap {
+position: relative;
+border-radius: 10%;
+height: 342px;
+width: 240px;
+}
+
+.movieDescription {
+  position:absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(29, 106, 154, 0.72);
+  visibility: hidden;
+  opacity: 0;
+  color: #fff;
+}
+
+.imgWrap:hover .movieDescription {
+  visibility: visible;
+  opacity: 1;
+}
+
+.movieDescription a p {
+  display: inline-block;
 }
