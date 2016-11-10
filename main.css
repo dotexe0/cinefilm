@@ -1,6 +1,7 @@
 html {
   background-color: #F3F3F3;
   text-align: center;
+  font-family: roboto;
 }
 
 img {
@@ -30,13 +31,19 @@ img {
   top: 10px;
   left: 100px;
   height: 342px;
-  width: 800px;
-  background-color: black;
+  width: 90%;
+  background-color: #2F4F4F;
   border-top-right-radius: 10%;
   border-bottom-right-radius: 10%;
 }
 
-.description textarea {
+.movieLinks a, a:after {
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.description  {
   right: 0px;
 }
 
@@ -54,13 +61,6 @@ img {
   height: 300px;
 }*/
 
-.imgWrap {
-position: relative;
-border-radius: 10%;
-height: 342px;
-width: 240px;
-}
-
 .movieDescription {
   position:absolute;
   top: 0;
@@ -73,11 +73,29 @@ width: 240px;
   color: #fff;
 }
 
-.imgWrap:hover .movieDescription {
-  visibility: visible;
-  opacity: 1;
+.hidden {
+  display: none;
 }
 
-.movieDescription a p {
-  display: inline-block;
+.fa {
+  font-size: 25px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.metacritic, .rottentomatoes{
+  width: 30px;
+  height: 30px;
+  padding-right: 10px;
+  margin: 0;
+}
+
+footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-top: 10px;
+  background-color: #efefef;
+  text-align: center;
 }
