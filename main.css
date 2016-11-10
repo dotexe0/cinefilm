@@ -1,19 +1,29 @@
 html {
-  background-color: #F3F3F3;
+  background-color: black;
   text-align: center;
   font-family: roboto;
+  color: white;
+}
+.title {
+  text-align: center;
+}
+div {
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
 }
 
-img {
-
+.movieContainer {
+  display: inline;
 }
+
 .movieCard {
-  align-items: center;
   display: inline;
   padding: 10px;
   border-radius: 10%;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   background: rgba(29, 106, 154, 0.72);
 }
 .js-search-results {
@@ -25,52 +35,33 @@ img {
   left: 300;
 }
 
-.description {
+.cardDescription {
   color: white;
   position: absolute;
   top: 10px;
-  left: 100px;
+  left: 270px;
   height: 342px;
-  width: 90%;
+  width: 60%;
   background-color: #2F4F4F;
   border-top-right-radius: 10%;
   border-bottom-right-radius: 10%;
+  overflow: hidden;
 }
 
+span {
+  font-weight:lighter;
+  font-size: 12px;
+  text-align: left;
+  left: 35px;
+}
 .movieLinks a, a:after {
   color: white;
   display: inline-block;
   text-decoration: none;
 }
 
-.description  {
-  right: 0px;
-}
-
 .js-search-form {
   margin-bottom: 20px;
-}
-/*
-.featherlight {
-  iframe: 'index.html'; iframeMaxWidth: '80%';
-   iframeWidth: 560px;
-    iframeHeight: 315px;
-};
-.featherlight-content {
-  width: 600px;
-  height: 300px;
-}*/
-
-.movieDescription {
-  position:absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(29, 106, 154, 0.72);
-  visibility: hidden;
-  opacity: 0;
-  color: #fff;
 }
 
 .hidden {
@@ -92,6 +83,7 @@ img {
 
 footer {
   position: fixed;
+  margin-top: 40px;
   right: 0;
   bottom: 0;
   left: 0;

@@ -40,11 +40,9 @@ function displaySearchData(data){
           var commonSenseMedia = data.common_sense_media;
           var metaCritic = data.metacritic;
           var trailerVideo = data.trailers.web[0].embed;
-
-
           var description =
             "<div class='cardDescription hidden'>" +
-              "<h1>" + data.title + "</h1>" +
+              "<h1 class='title'>" + data.title + "</h1>" +
               "<div class='movieLinks'>" +
                 "<a target='_blank' href=" + imdbLink + "><i class='fa fa-imdb fa-2x' aria-hidden='true'></i></a>" +
                 "<a target='_blank' href=" + rottenTomatoes +"><img class='rottentomatoes' src='images/rottentomatoes_icon.png'></a>" +
@@ -52,10 +50,12 @@ function displaySearchData(data){
                 "<a target='_blank' href=" + commonSenseMedia + "<i class='fa fa-check-circle-o fa-2x' aria-hidden='true'></i></a><br>" +
                 "<a href=" + trailerVideo + " rel='trailervideo' title='Trailer' target='iframe_a'>"+
                   "<i class='fa fa-youtube-play fa-3x' aria-hidden='true'></i>" +
-                  "<iframe height='300px' width='100%' src='' name='iframe_a'></iframe></a>" +
-              "</div>"+ "<span>" + movieDescription + "</span>" + "</div>";
+                  // "<iframe height='300px' width='100%' src='' name='iframe_a'></iframe>" +
+                  "</a>" +
+              "</div>"+ "<span>" + movieDescription + "</span>" +
+            "</div>";
 
-          movieCard = "<div class=''><img class='movieCard' src=" + image + ">" + description + "</div>";
+          movieCard = "<div class='movieContainer'><img class='movieCard' src=" + image + ">" + description + "</div>";
           $('.js-search-results').append(movieCard);
         });
       }
@@ -66,21 +66,21 @@ function displaySearchData(data){
 };
 
 $(document).on('click','.movieCard', function(){
-  console.log('card clicked');
   $(this).addClass("active");
-  $(this).parent().find('.cardDescription').removeClass('hidden')
+  $(this).parent().find('.cardDescription').removeClass('hidden');
+  $(this).parent().find('.cardDescription').hide();
   $('.movieCard').hide();
   $('.active').show();
   $(this).animate({
         left: '0px'
     }, 1000);
-  $('.description').show(1000);
+  $(this).parent().find('.cardDescription').show(1000);
 });
 
 $(document).on('click', '.active', function(){
   $(this).removeClass('active');
   $('.movieCard').show();
-  $('.description').hide();
+  $('.cardDescription').addClass('hidden');
 
 });
 
