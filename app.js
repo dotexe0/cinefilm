@@ -2,17 +2,17 @@
 // var TASTE_KID_BASE_URL = 'https://www.tastekid.com/api/similar';
 
 var GUIDE_BOX_API_KEY = 'rKGb7Oh50TpEuVG55ENiKRKUxCBmrYVd';
-var GUIDE_BOX_BASE_URL = 'http://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/search/movie/title/';
-var quota = $.getJSON('http://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/quota', function(data){
+var GUIDE_BOX_BASE_URL = 'https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/search/movie/title/';
+var quota = $.getJSON('https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/quota', function(data){
   console.log(data);
 });
-var IMDB_URL = "http://www.imdb.com/title/";
+var IMDB_URL = "https://www.imdb.com/title/";
 var ROTTEN_URL = "https://www.rottentomatoes.com/m/";
 //display popular movies by default on main page
 var start = 0;
 var end = 10;
 function defaultDisplayData(start=0, end=10){
-  var movieSearchURL = 'http://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/movies/all/' + start +'/' + end;
+  var movieSearchURL = 'https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/movies/all/' + start +'/' + end;
   $.getJSON(movieSearchURL, displaySearchData)
 }
 
@@ -23,7 +23,7 @@ function getSearchDataFromApi(searchTerm, callback) {
 };
 
 function displaySearchData(data){
-  var emptyImage = 'http://static-api.guidebox.com/misc/default_movie_240x342.jpg';
+  var emptyImage = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
   if (data.results) {
     data.results.forEach(function(item) {
       var image = item.poster_240x342;
@@ -42,12 +42,12 @@ function displaySearchData(data){
           var trailerVideo = data.trailers.web[0].embed;
           var description =
             "<div class='cardDescription hidden'>" +
-              "<h1 class='title'>" + data.title + "</h1>" +
+              "<h1>" + data.title + "</h1>" +
               "<div class='movieLinks'>" +
                 "<a target='_blank' href=" + imdbLink + "><i class='fa fa-imdb fa-2x' aria-hidden='true'></i></a>" +
                 "<a target='_blank' href=" + rottenTomatoes +"><img class='rottentomatoes' src='images/rottentomatoes_icon.png'></a>" +
                 "<a target='_blank' href=" + metaCritic +"><img class='metacritic' src='images/metacritic_icon.png'></a>" +
-                "<a target='_blank' href=" + commonSenseMedia + "<i class='fa fa-check-circle-o fa-2x' aria-hidden='true'></i></a><br>" +
+                "<a target='_blank' href=" + commonSenseMedia + " <i class='fa fa-check-circle-o fa-2x' aria-hidden='true'></i></a><br>" +
                 "<a href=" + trailerVideo + " rel='trailervideo' title='Trailer' target='iframe_a'>"+
                   "<i class='fa fa-youtube-play fa-3x' aria-hidden='true'></i>" +
                   // "<iframe height='300px' width='100%' src='' name='iframe_a'></iframe>" +
