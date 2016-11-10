@@ -10,7 +10,7 @@ html {
   font-family: 'Monoton', cursive;
   font-size: 60px;
   background: #A52630;
-  
+
 }
 div {
    -moz-box-sizing: border-box;
@@ -48,8 +48,10 @@ div {
   left: 270px;
   height: 342px;
   width: 60%;
-  background-color: ##A52630;
+  background-color: #A52630;
   border-radius: 10%;
+  border-width: 10px;
+  border-color: black;
   /*border-top-right-radius: 10%;
   border-bottom-right-radius: 10%;*/
   overflow: hidden;
