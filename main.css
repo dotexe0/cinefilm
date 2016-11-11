@@ -13,12 +13,15 @@ div {
 
 .title {
   color: black;
+  display: inline-block;
+  border: 10px solid white;
   text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
   font-family: 'Monoton', cursive;
   font-size: 60px;
   background: #A52630;
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
+
 }
 
 .title a, a:before, a:after {
@@ -26,12 +29,15 @@ div {
   text-decoration: none;
   text-align: center;
 }
+
 .js-query {
   width: 200px;
   height: 20px;
   border-radius: 5px;
   padding-right: 10px;
+  margin-bottom: 10px;
 }
+
 .submit {
   width: 90px;
   height: 25px;
@@ -57,12 +63,12 @@ div {
   margin-right: 10px;
   margin-bottom: 10px;
   background: #A52630;
-  /*//rgba(29, 106, 154, 0.72)*/
 }
 
 .movie-title {
   margin-bottom: 5px;
 }
+
 .js-search-results {
   position: relative;
 }
@@ -84,14 +90,11 @@ div {
   border-width: 10px;
   border-color: #A52630;
   border-style: solid;
-  /*border-top-left-radius: 10%;
-  border-top-right-radius: 40%;
-  border-bottom-right-radius: 10%;*/
   overflow: hidden;
   overflow-y: scroll;
 }
 
-span {
+.movieText {
   display: block;
   font-weight:lighter;
   font-size: 12px;
@@ -105,12 +108,16 @@ span {
 
 .mpaa-rating {
   padding-top: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 0px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
-.commonsense, .commonsense:after{
+.genre {
+  margin: 0;
+  padding-bottom: 15px;
+}
+.commonsense, .commonsense:after {
   color: white;
   display: inline-block;
   text-decoration: none;
@@ -121,6 +128,14 @@ span {
   color: white;
   display: inline-block;
   text-decoration: none;
+}
+.fa-film:before {
+  color: white;
+
+}
+.watch {
+  display: inline;
+  padding-right: 10px;
 }
 
 .js-search-form {
@@ -159,31 +174,23 @@ span {
 }
 
 .fa-github:hover {
-  color: red;
-}
-/*.metacritic, .rottentomatoes{
-  width: 32px;
-  height: 27px;
-  padding-right: 10px;
-  margin: 0;
+  color: white;
 }
 
-.metacritic:hover {
-  background-image: url('images/metacritic_icon_after.png');
-  width: 32px;
-  height: 27px;
-  padding-right: 10px;
-  margin: 0;
-  visibility: 0;
+.fa-film:hover {
+  color: white;
 }
 
-.rottentomatoes:hover {
-  background-image: url('images/rottentomatoes_icon_after.png');
-  width: 32px;
-  height: 27px;
-  padding-right: 10px;
-  margin: 0;
-}*/
+.featherlight iframe {
+  width: 640px;
+  height: 360px;
+}
+
+span.featherlight-close-icon.featherlight-close {
+  width: 10px;
+  height: 10px;
+  right: 0;
+}
 
 footer {
   position: fixed;
