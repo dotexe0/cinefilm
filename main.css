@@ -91,7 +91,7 @@ div {
   border-color: #A52630;
   border-style: solid;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: scroll hidden;
 }
 
 .movieText {
