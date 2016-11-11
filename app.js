@@ -11,7 +11,7 @@ var ROTTEN_URL = "https://www.rottentomatoes.com/m/";
 //display popular movies by default on main page
 var start = 0;
 var end = 10;
-function defaultDisplayData(start=0, end=10){
+function defaultDisplayData(start=0, end=12){
   var movieSearchURL = 'https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/movies/all/' + start +'/' + end;
   $.getJSON(movieSearchURL, displaySearchData)
 }
@@ -40,14 +40,15 @@ function displaySearchData(data){
           var commonSenseMedia = data.common_sense_media;
           var metaCritic = data.metacritic;
           var trailerVideo = data.trailers.web[0].embed;
-          var description =
+          var watchLinks = data;
+          var description ='';
             "<div class='cardDescription hidden'>" +
               "<h1>" + data.title + "</h1>" +
               "<div class='movieLinks'>" +
                 "<a target='_blank' href=" + imdbLink + "><i class='fa fa-imdb fa-2x' aria-hidden='true'></i></a>" +
                 "<a target='_blank' href=" + rottenTomatoes +"><img class='rottentomatoes' src='images/rottentomatoes_icon.png'></a>" +
                 "<a target='_blank' href=" + metaCritic +"><img class='metacritic' src='images/metacritic_icon.png'></a>" +
-                "<a target='_blank' href=" + commonSenseMedia + " <i class='fa fa-check-circle-o fa-2x' aria-hidden='true'></i></a><br>" +
+                "<a target='_blank' href=" + commonSenseMedia + " ><i class='fa fa-check-circle-o fa-2x' aria-hidden='true'></i></a><br>" +
                 "<a href=" + trailerVideo + " rel='trailervideo' title='Trailer' target='iframe_a'>"+
                   "<i class='fa fa-youtube-play fa-3x' aria-hidden='true'></i>" +
                   // "<iframe height='300px' width='100%' src='' name='iframe_a'></iframe>" +
@@ -72,7 +73,7 @@ $(document).on('click','.movieCard', function(){
   $('.movieCard').hide();
   $('.active').show();
   $(this).animate({
-        left: '0px'
+        left: '30px'
     }, 1000);
   $(this).parent().find('.cardDescription').show(1000);
 });
@@ -81,7 +82,6 @@ $(document).on('click', '.active', function(){
   $(this).removeClass('active');
   $('.movieCard').show();
   $('.cardDescription').addClass('hidden');
-
 });
 
 //wait for a submit click

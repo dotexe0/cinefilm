@@ -1,21 +1,37 @@
 html {
-  background-color: grey;
+  background-image:url( "http://api.thumbr.it/whitenoise-361x370.png?background=9ca0a1ff&noise=626262&density=15&opacity=15");
   text-align: center;
   font-family: roboto;
   color: white;
 }
+
+div {
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+}
+
 .title {
   color: black;
   text-align: center;
   font-family: 'Monoton', cursive;
   font-size: 60px;
   background: #A52630;
-
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
 }
-div {
-   -moz-box-sizing: border-box;
-   -webkit-box-sizing: border-box;
-   box-sizing: border-box;
+
+.title a, a:before, a:after {
+  color: black;
+  text-decoration: none;
+  text-align: center;
+}
+
+.submit {
+  width: 90px;
+  height: 25px;
+  border-radius: 15px;
+  background-color: #A52630;
 }
 
 .movieContainer {
@@ -30,7 +46,7 @@ div {
   margin-right: 10px;
   margin-bottom: 10px;
   background: #A52630;
-  //rgba(29, 106, 154, 0.72);
+  /*//rgba(29, 106, 154, 0.72)*/
 }
 .js-search-results {
   position: relative;
@@ -44,24 +60,32 @@ div {
 .cardDescription {
   color: white;
   position: absolute;
-  top: 10px;
-  left: 270px;
-  height: 342px;
+  left: 290px;
+  height: 362px;
   width: 60%;
-  background-color: #A52630;
+  margin-bottom: 60px;
+  background-color: black;
   border-radius: 10%;
   border-width: 10px;
-  border-color: black;
-  /*border-top-right-radius: 10%;
+  border-color: #A52630;
+  border-style: solid;
+  /*border-top-left-radius: 10%;
+  border-top-right-radius: 40%;
   border-bottom-right-radius: 10%;*/
   overflow: hidden;
+  overflow-y: scroll;
 }
 
 span {
+  display: block;
   font-weight:lighter;
   font-size: 12px;
-  text-align: left;
+  text-align: justify;
   left: 35px;
+  padding-left: 40px;
+  padding-right: 40px;
+
+
 }
 .movieLinks a, a:after {
   color: white;
@@ -91,7 +115,9 @@ span {
 }
 
 footer {
-  position: fixed;
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
   margin-top: 40px;
   right: 0;
   bottom: 0;
