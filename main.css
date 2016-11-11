@@ -26,12 +26,23 @@ div {
   text-decoration: none;
   text-align: center;
 }
-
+.js-query {
+  width: 200px;
+  height: 20px;
+  border-radius: 5px;
+  padding-right: 10px;
+}
 .submit {
   width: 90px;
   height: 25px;
   border-radius: 15px;
   background-color: #A52630;
+  outline-width: 0;
+  border: 0px;
+}
+
+.submit:hover {
+  background-color: #8B1A1A;
 }
 
 .movieContainer {
@@ -47,6 +58,10 @@ div {
   margin-bottom: 10px;
   background: #A52630;
   /*//rgba(29, 106, 154, 0.72)*/
+}
+
+.movie-title {
+  margin-bottom: 5px;
 }
 .js-search-results {
   position: relative;
@@ -84,9 +99,24 @@ span {
   left: 35px;
   padding-left: 40px;
   padding-right: 40px;
-
-
+  padding-bottom: 20px;
+  border-bottom: 3px solid #808080;
 }
+
+.mpaa-rating {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.commonsense, .commonsense:after{
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
 .movieLinks a, a:after {
   color: white;
   display: inline-block;
@@ -105,17 +135,58 @@ span {
   font-size: 25px;
   padding-right: 10px;
   padding-bottom: 10px;
+
 }
 
-.metacritic, .rottentomatoes{
-  width: 30px;
-  height: 30px;
+/*mdb, rottentomatoes, metacritic, common sense media, and video links*/
+.fa-imdb:hover {
+  color: yellow;
+}
+
+.fa-circle:hover {
+  color: red;
+}
+
+.fa-meetup:hover {
+  color: green;
+}
+.fa-youtube-play:hover {
+  color: red;
+}
+
+.fa-check-circle-o:hover {
+  color: green;
+}
+
+.fa-github:hover {
+  color: red;
+}
+/*.metacritic, .rottentomatoes{
+  width: 32px;
+  height: 27px;
   padding-right: 10px;
   margin: 0;
 }
 
+.metacritic:hover {
+  background-image: url('images/metacritic_icon_after.png');
+  width: 32px;
+  height: 27px;
+  padding-right: 10px;
+  margin: 0;
+  visibility: 0;
+}
+
+.rottentomatoes:hover {
+  background-image: url('images/rottentomatoes_icon_after.png');
+  width: 32px;
+  height: 27px;
+  padding-right: 10px;
+  margin: 0;
+}*/
+
 footer {
-  position: relative;
+  position: fixed;
   width: 100%;
   border-radius: 20px;
   margin-top: 40px;
