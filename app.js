@@ -10,7 +10,7 @@ var IMDB_URL = "https://www.imdb.com/title/";
 var ROTTEN_URL = "https://www.rottentomatoes.com/m/";
 //display popular movies by default on main page
 
-function defaultDisplayData(start=0, end=28){
+function defaultDisplayData(start=0, end=24){
   var movieSearchURL = 'https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/movies/all/' + start +'/' + end;
   $.getJSON(movieSearchURL, displaySearchData)
 }
