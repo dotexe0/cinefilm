@@ -1,6 +1,7 @@
 # cinefilm
 A movie aggregator website that runs off Guidebox's API. This project uses HTML, CSS, JavaScript, and JQuery.
-
+<h2>Live Page</h2>
+[Cinefilm](http://dotexe0.github.io/cinefilm)
 <h2>Use Case</h2>
 This app is for those who are interested in watching a movie, but don't know which to pick. Cinefilm is a one-stop shop to decide what to watch. The app allows you to read a short movie description, watch the movie trailer, and rent or buy the movie if you so choose. 
 
