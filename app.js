@@ -1,3 +1,6 @@
+// var $ = require('jquery');
+// var jQuery = require('jquery');
+
 $(document).ready(function() {
 
   var OMDB_BASE_URL = "https://www.omdbapi.com/?i=";

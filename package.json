@@ -1,0 +1,53 @@
+{
+  "name": "cinefilm",
+  "version": "1.0.0",
+  "description": "Movie Aggregator",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mkdir": "mkdir -p build",
+    "build": "npm run clean && npm run mkdir && npm run build:html && npm run build:css && npm run build:js",
+    "watch": "npm run watch:html & npm run watch:css",
+    "clean": "rm -rf build",
+    "build:html": "npm run clean:html && cp index.html build/ && cp  featherlight-1.5.1/release/featherlight.min.js build/ && cp featherlight-1.5.1/release/featherlight.min.css build/",
+    "watch:html": "npm run build:html && chokidar index.html -c 'npm run build:html'",
+    "clean:html": "rm -f build/index.html",
+    "build:js": "npm run clean:js && webpack",
+    "watch:js": "npm run build:js && webpack --watch",
+    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.$npm_package_version.js.map",
+    "build:css": "npm run build:css:unminified && npm run build:css:minified",
+    "watch:css": "npm run watch:css:unminified & npm run watch:css:minified",
+    "clean:css": "npm run clean:css:unminified && npm run clean:css:minified",
+    "build:css:unminified": "npm run clean:css:unminified && lessc --source-map css/index.less build/$npm_package_name.$npm_package_version.css",
+    "watch:css:unminified": "npm run build:css:unminified && chokidar 'css/**/*.(css|less)' -c 'npm run build:css:unminified'",
+    "clean:css:unminified": "rm -f build/$npm_package_name.$npm_package_version.css build/$npm_package_name.$npm_package_version.css.map",
+    "build:css:minified": "npm run clean:css:minified && lessc --clean-css --source-map css/index.less build/$npm_package_name.$npm_package_version.min.css",
+    "watch:css:minified": "npm run build:css:minified && chokidar 'css/**/*.(css|less)' -c 'npm run build:css:minified'",
+    "clean:css:minified": "rm -f build/$npm_package_name.$npm_package_version.min.css build/$npm_package_name.$npm_package_version.min.css.map"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotexe0/cinefilm.git"
+  },
+  "keywords": [
+    "movie",
+    "film",
+    "cine"
+  ],
+  "author": "Daniel Varela",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dotexe0/cinefilm/issues"
+  },
+  "homepage": "https://github.com/dotexe0/cinefilm#readme",
+  "dependencies": {
+    "jquery": "^3.1.1"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^1.2.0",
+    "jquery": "^3.1.1",
+    "less": "^2.7.1",
+    "less-plugin-clean-css": "^1.5.1",
+    "webpack": "^1.13.3"
+  }
+}

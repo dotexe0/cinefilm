@@ -5,6 +5,10 @@ html {
   color: white;
 }
 
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
 div {
    -moz-box-sizing: border-box;
    -webkit-box-sizing: border-box;
@@ -31,20 +35,26 @@ div {
 }
 
 .js-query {
+  border: solid 5px #A52630;
   width: 200px;
   height: 20px;
   border-radius: 5px;
-  padding-right: 10px;
+  margin-right: 10px;
   margin-bottom: 10px;
+  padding: 10px;
+  transition: border 0.3s;
+  font-size: 20px;
 }
 
 .submit {
   width: 90px;
-  height: 25px;
-  border-radius: 15px;
-  background-color: #A52630;
+  border-radius: 5px;
+  background-color: #ffffff;
   outline-width: 0;
-  border: 0px;
+  padding: 8px;
+  transition: background-color 0.3s;
+  border: solid 5px #A52630;
+  font-size: 20px;
 }
 
 .submit:hover {
@@ -64,6 +74,7 @@ div {
   margin-bottom: 10px;
   background: #A52630;
 }
+
 
 .movie-title {
   margin-bottom: 5px;
@@ -92,6 +103,11 @@ div {
   border-style: solid;
   overflow: hidden;
   overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
 }
 
 .movieText {
@@ -187,8 +203,8 @@ div {
 }
 
 span.featherlight-close-icon.featherlight-close {
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 20px;
   right: 0;
 }
 
@@ -211,7 +227,7 @@ footer {
   and (min-device-width: 375px)
   and (max-device-width: 667px)
   and (-webkit-min-device-pixel-ratio: 2) {
-    
+
 }
 
 /* Portrait */
