@@ -15,6 +15,22 @@ div {
    box-sizing: border-box;
 }
 
+.moviePageButton {
+  width: 200px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  outline-width: 0;
+  padding: 8px;
+  transition: background-color 0.3s;
+  border: solid 5px #A52630;
+  font-size: 20px;
+  }
+
+  .linkToMain {
+    text-decoration: none;
+    color: green;
+  }
+
 .title {
   color: black;
   display: inline-block;

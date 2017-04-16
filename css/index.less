@@ -15,6 +15,31 @@ div {
    box-sizing: border-box;
 }
 
+.moviePageButton {
+  width: 200px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  outline-width: 0;
+  padding: 8px;
+  transition: background-color 0.3s;
+  border: solid 5px #A52630;
+  font-size: 20px;
+  }
+
+  .linkToMain {
+    text-decoration: none;
+    width: 200px;
+    border-radius: 5px;
+    color: black;
+    background-color: #ffffff;
+    outline-width: 0;
+    padding: 8px;
+    transition: background-color 0.3s;
+    border: solid 3px #A52630;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
 .title {
   color: black;
   display: inline-block;
@@ -25,7 +50,11 @@ div {
   font-family: 'Monoton', cursive;
   font-size: 60px;
   background: #A52630;
+}
 
+.titleText {
+  padding: 0;
+  margin-bottom: 25px;
 }
 
 .title a, a:before, a:after {
@@ -57,8 +86,9 @@ div {
   font-size: 20px;
 }
 
-.submit:hover {
+.submit:hover, .linkToMain:hover {
   background-color: #8B1A1A;
+  color: white;
 }
 
 .movieContainer {
@@ -217,7 +247,6 @@ span.featherlight-close-icon.featherlight-close {
 footer {
   position: fixed;
   width: 100%;
-  border-radius: 20px;
   margin-top: 40px;
   right: 0;
   bottom: 0;
