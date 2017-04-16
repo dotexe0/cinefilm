@@ -68,14 +68,18 @@ div {
 .movieCard {
   display: inline;
   padding: 10px;
-  border-radius: 10%;
+  /*border-radius: 10%;*/
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
   background: #A52630;
+  /*border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;*/
 }
 
-
+img.movieCard:hover {
+  cursor: pointer;
+}
 .movie-title {
   margin-bottom: 5px;
 }
@@ -97,12 +101,14 @@ div {
   width: 60%;
   margin-bottom: 60px;
   background-color: black;
-  border-radius: 10%;
+  /*border-radius: 10px;*/
   border-width: 10px;
   border-color: #A52630;
   border-style: solid;
   overflow: hidden;
   overflow-y: scroll;
+  /*border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;*/
 }
 
 ::-webkit-scrollbar {
