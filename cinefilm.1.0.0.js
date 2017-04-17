@@ -84,6 +84,8 @@
 	  if (data.results) {
 	    data.results.forEach(function(item) {
 	      var image = item.poster_240x342;
+	      image = image.replace('http', 'https');
+	      console.log(image);
 	      if (image != emptyImage) {
 	        //get movie details if image exists from api
 	        var trailerLinksURL = 'https://api-public.guidebox.com/v1.43/US/' + GUIDE_BOX_API_KEY + '/movie/' + item.id;
