@@ -100,6 +100,8 @@
 	          var commonSenseMedia = data.common_sense_media;
 	          var metaCritic = data.metacritic;
 	          var trailerVideo = data.trailers.web[0].embed;
+	          trailerVideo = trailerVideo.replace('http', 'https');
+	          console.log(trailerVideo);
 	          var watchLinks = data.purchase_web_sources[0].link;
 	          var description =
 	            "<div class='cardDescription hidden'>" +
