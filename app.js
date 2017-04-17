@@ -39,7 +39,6 @@ $(document).ready(function() {
     data.results.forEach(function(item) {
       var image = item.poster_240x342;
       image = image.replace('http', 'https');
-      console.log(image);
       if (image != emptyImage) {
         //get movie details if image exists from api
         var trailerLinksURL = 'https://api-public.guidebox.com/v1.43/US/' + GUIDE_BOX_API_KEY + '/movie/' + item.id;
@@ -56,8 +55,8 @@ $(document).ready(function() {
           var commonSenseMedia = data.common_sense_media;
           var metaCritic = data.metacritic;
           var trailerVideo = data.trailers.web[0].embed;
-          trailerVideo = trailerVideo.replace('http', 'https');
-          console.log(trailerVideo);
+          // trailerVideo = trailerVideo.replace('http', 'https');
+          // console.log(data.trailers);
           var watchLinks = data.purchase_web_sources[0].link;
           var description =
             "<div class='cardDescription hidden'>" +
