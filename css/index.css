@@ -1,8 +1,20 @@
+@color-scheme-red: #A52630;
+
 html {
-  background-image:url( "http://api.thumbr.it/whitenoise-361x370.png?background=9ca0a1ff&noise=626262&density=15&opacity=15");
+  background: url('../images/film2.jpg') no-repeat center center fixed; 
+  background-image: url('../images/film2.jpg');
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url('../images/film2.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   text-align: center;
   font-family: roboto;
   color: white;
+}
+
+body {
+  display: inline-block;
 }
 
 ::-webkit-scrollbar {
@@ -15,6 +27,14 @@ div {
    box-sizing: border-box;
 }
 
+.titleBox {
+  background: @color-scheme-red;
+  width: 500px;
+  margin: 0 auto;
+  height: 150px;
+  border: 5px solid white;
+}
+
 .moviePageButton {
   width: 200px;
   border-radius: 5px;
@@ -22,13 +42,22 @@ div {
   outline-width: 0;
   padding: 8px;
   transition: background-color 0.3s;
-  border: solid 5px #A52630;
+  border: solid 5px @color-scheme-red;
   font-size: 20px;
   }
 
   .linkToMain {
     text-decoration: none;
-    color: green;
+    width: 200px;
+    border-radius: 5px;
+    color: black;
+    background-color: #ffffff;
+    outline-width: 0;
+    padding: 8px;
+    transition: background-color 0.3s;
+    border: solid 3px black;
+    font-size: 20px;
+    margin-top: 20px;
   }
 
 .title {
@@ -40,8 +69,12 @@ div {
   padding-right: 10px;
   font-family: 'Monoton', cursive;
   font-size: 60px;
-  background: #A52630;
+  background: @color-scheme-red;
+}
 
+.titleText {
+  padding: 0;
+  margin-bottom: 25px;
 }
 
 .title a, a:before, a:after {
@@ -51,7 +84,7 @@ div {
 }
 
 .js-query {
-  border: solid 5px #A52630;
+  border: solid 5px @color-scheme-red;
   width: 200px;
   height: 20px;
   border-radius: 5px;
@@ -69,12 +102,13 @@ div {
   outline-width: 0;
   padding: 8px;
   transition: background-color 0.3s;
-  border: solid 5px #A52630;
+  border: solid 5px @color-scheme-red;
   font-size: 20px;
 }
 
-.submit:hover {
-  background-color: #8B1A1A;
+.submit:hover, .linkToMain:hover {
+  background-color: @color-scheme-red;
+  color: white;
 }
 
 .movieContainer {
@@ -88,7 +122,7 @@ div {
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
-  background: #A52630;
+  background: @color-scheme-red;
   /*border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;*/
 }
@@ -119,7 +153,7 @@ img.movieCard:hover {
   background-color: black;
   /*border-radius: 10px;*/
   border-width: 10px;
-  border-color: #A52630;
+  border-color: @color-scheme-red;
   border-style: solid;
   overflow: hidden;
   overflow-y: scroll;
@@ -233,7 +267,6 @@ span.featherlight-close-icon.featherlight-close {
 footer {
   position: fixed;
   width: 100%;
-  border-radius: 20px;
   margin-top: 40px;
   right: 0;
   bottom: 0;
@@ -241,6 +274,21 @@ footer {
   padding-top: 10px;
   background-color: #efefef;
   text-align: center;
+}
+
+
+@media only screen and (max-width : 750px) {
+  body {
+    background-color: red;
+  }
+
+  .cardDescription {
+    max-width: 100%;
+  }
+
+  .active {
+    display: inline-block;
+  }
 }
 /* ----------- iPhone 6 ----------- */
 

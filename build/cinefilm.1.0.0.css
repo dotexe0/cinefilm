@@ -1,7 +1,7 @@
 html {
-  background: url('./film2.jpg') no-repeat center center fixed;
-  background-image: url('./film2.jpg');
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url('./film2.jpg');
+  background: url('../images/film2.jpg') no-repeat center center fixed;
+  background-image: url('../images/film2.jpg');
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url('../images/film2.jpg');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -121,7 +121,6 @@ img.movieCard:hover {
 }
 .js-search-results {
   position: relative;
-  margin: 0 auto;
 }
 .active {
   position: absolute;
@@ -243,6 +242,20 @@ footer {
   padding-top: 10px;
   background-color: #efefef;
   text-align: center;
+}
+@media only screen and (max-width: 750px) {
+  body {
+    background-color: red;
+  }
+  .cardDescription {
+    width: 100%;
+    left: 0;
+    height: inherit;
+  }
+  img.movieCard.active {
+    position: inherit !important;
+    display: inline-block;
+  }
 }
 /* ----------- iPhone 6 ----------- */
 /* Portrait and Landscape */

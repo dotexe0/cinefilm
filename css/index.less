@@ -1,3 +1,5 @@
+@color-scheme-red: #A52630;
+
 html {
   background: url('../images/film2.jpg') no-repeat center center fixed; 
   background-image: url('../images/film2.jpg');
@@ -22,7 +24,7 @@ div {
 }
 
 .titleBox {
-  background: #A52630;
+  background: @color-scheme-red;
   width: 500px;
   margin: 0 auto;
   height: 150px;
@@ -36,7 +38,7 @@ div {
   outline-width: 0;
   padding: 8px;
   transition: background-color 0.3s;
-  border: solid 5px #A52630;
+  border: solid 5px @color-scheme-red;
   font-size: 20px;
   }
 
@@ -63,7 +65,7 @@ div {
   padding-right: 10px;
   font-family: 'Monoton', cursive;
   font-size: 60px;
-  background: #A52630;
+  background: @color-scheme-red;
 }
 
 .titleText {
@@ -78,7 +80,7 @@ div {
 }
 
 .js-query {
-  border: solid 5px #A52630;
+  border: solid 5px @color-scheme-red;
   width: 200px;
   height: 20px;
   border-radius: 5px;
@@ -96,12 +98,12 @@ div {
   outline-width: 0;
   padding: 8px;
   transition: background-color 0.3s;
-  border: solid 5px #A52630;
+  border: solid 5px @color-scheme-red;
   font-size: 20px;
 }
 
 .submit:hover, .linkToMain:hover {
-  background-color: #A52630;
+  background-color: @color-scheme-red;
   color: white;
 }
 
@@ -116,7 +118,7 @@ div {
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
-  background: #A52630;
+  background: @color-scheme-red;
   /*border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;*/
 }
@@ -147,7 +149,7 @@ img.movieCard:hover {
   background-color: black;
   /*border-radius: 10px;*/
   border-width: 10px;
-  border-color: #A52630;
+  border-color: @color-scheme-red;
   border-style: solid;
   overflow: hidden;
   overflow-y: scroll;
@@ -269,140 +271,17 @@ footer {
   background-color: #efefef;
   text-align: center;
 }
-/* ----------- iPhone 6 ----------- */
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 375px)
-  and (max-device-width: 667px)
-  and (-webkit-min-device-pixel-ratio: 2) {
 
-}
+@media only screen and (max-width : 750px) {
+  .cardDescription {
+    width: 100%;
+    left: 0;
+    height: inherit;
+  }
 
-/* Portrait */
-@media only screen
-  and (min-device-width: 375px)
-  and (max-device-width: 667px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: portrait) {
-
-}
-
-/* Landscape */
-@media only screen
-  and (min-device-width: 375px)
-  and (max-device-width: 667px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) {
-
-}
-
-/* ----------- iPhone 6+ ----------- */
-
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 414px)
-  and (max-device-width: 736px)
-  and (-webkit-min-device-pixel-ratio: 3) {
-
-}
-
-/* Portrait */
-@media only screen
-  and (min-device-width: 414px)
-  and (max-device-width: 736px)
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: portrait) {
-
-}
-
-/* Landscape */
-@media only screen
-  and (min-device-width: 414px)
-  and (max-device-width: 736px)
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: landscape) {
-
-}
-
-/* ----------- iPad mini ----------- */
-
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (-webkit-min-device-pixel-ratio: 1) {
-
-}
-
-/* Portrait */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: portrait)
-  and (-webkit-min-device-pixel-ratio: 1) {
-
-}
-
-/* Landscape */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: landscape)
-  and (-webkit-min-device-pixel-ratio: 1) {
-
-}
-
-/* ----------- iPad 1 and 2 ----------- */
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (-webkit-min-device-pixel-ratio: 1) {
-
-}
-
-/* Portrait */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: portrait)
-  and (-webkit-min-device-pixel-ratio: 1) {
-
-}
-
-/* Landscape */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: landscape)
-  and (-webkit-min-device-pixel-ratio: 1) {
-
-}
-
-/* ----------- iPad 3 and 4 ----------- */
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (-webkit-min-device-pixel-ratio: 2) {
-
-}
-
-/* Portrait */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: portrait)
-  and (-webkit-min-device-pixel-ratio: 2) {
-
-}
-
-/* Landscape */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: landscape)
-  and (-webkit-min-device-pixel-ratio: 2) {
-
+  img.movieCard.active {
+    position: inherit !important;
+    display: inline-block;
+  }
 }

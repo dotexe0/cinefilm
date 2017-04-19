@@ -49,17 +49,16 @@
 	
 	$(document).ready(function() {
 	
-	  var OMDB_BASE_URL = "https://www.omdbapi.com/?i=";
+	  var OMDB_BASE_URL = "https://www.omdbapi.com/?t=";
 	  var GUIDE_BOX_API_KEY = 'rKqSP9tWheryWwVDGrdBaAZemausGy95';
 	  var GUIDE_BOX_BASE_URL = 'https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/search/movie/title/';
 	  var quota = $.getJSON('https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/quota', function(data){
-	    console.log(data);
 	  });
 	  var IMDB_URL = "https://www.imdb.com/title/";
 	  var ROTTEN_URL = "https://www.rottentomatoes.com/m/";
 	
 	  //display popular movies by default on main page
-	  function defaultDisplayData(start=0, end=24) {
+	  function defaultDisplayData(start=0, end=11) {
 	    var movieSearchURL = 'https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/movies/all/' + start +'/' + end;
 	    $.getJSON(movieSearchURL, displaySearchData)
 	  }
@@ -79,17 +78,33 @@
 	    });
 	  };
 	
+	
+	  //get trailers
+	  function getTrailerVideo(url) {
+	    $.getJSON(url, function(data) {
+	      console.log(data.results[0].key);
+	       trailerVideo = 'https://www.youtube.com/embed/'+ data.results[0].key;
+	    });
+	  }
+	
 	  function displaySearchData(data){
+	    $.ajaxSetup({
+	    async: false
+	    });
 	  var emptyImage = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
 	  if (data.results) {
 	    data.results.forEach(function(item) {
+	
+	      var trailerBaseURL = 'https://api.themoviedb.org/3/movie/' + item.themoviedb +'/videos?api_key=074c1de1f173b40ae75cddd1cebe2527&language=en-US';
 	      var image = item.poster_240x342;
 	      image = image.replace('http', 'https');
 	      if (image != emptyImage) {
 	        //get movie details if image exists from api
-	        var trailerLinksURL = 'https://api-public.guidebox.com/v1.43/US/' + GUIDE_BOX_API_KEY + '/movie/' + item.id;
+	        var movieID = 'https://api-public.guidebox.com/v1.43/US/' + GUIDE_BOX_API_KEY + '/movie/' + item.id;
 	        //grab individual elements from movies to display in dom
-	        $.getJSON(trailerLinksURL, function(data){
+	        $.getJSON(movieID, function(data){
+	          getTrailerVideo(trailerBaseURL);
+	
 	          var movieCard = '';
 	          var rated = data.rating;
 	          var genre = data.genres[0].title;
@@ -100,9 +115,8 @@
 	          var rottenTomatoes = ROTTEN_URL + data.rottentomatoes;
 	          var commonSenseMedia = data.common_sense_media;
 	          var metaCritic = data.metacritic;
-	          var trailerVideo = data.trailers.web[0].embed;
-	          // trailerVideo = trailerVideo.replace('http', 'https');
-	          // console.log(trailerVideo);
+	          // var trailerVideo = data.trailers.web[0].embed;
+	
 	          var watchLinks = data.purchase_web_sources[0].link;
 	          var description =
 	            "<div class='cardDescription hidden'>" +
@@ -126,6 +140,9 @@
 	        });
 	      }
 	    });
+	    $.ajaxSetup({
+	    async: true
+	});
 	  } else {
 	    resultElement += '<p> no results <p>';
 	    ('.js-search-results').append(resultElement);
@@ -138,11 +155,17 @@
 	    $(this).parent().find('.cardDescription').hide();
 	    $('.movieCard').hide();
 	    $('.active').show();
+	
+	    $(this).parent().find('.cardDescription').show(1000);    
+	
 	    $(this).animate({
 	          left: '30px'
 	      }, 1000);
-	    $(this).parent().find('.cardDescription').show(1000);
-	  });
+	
+	      $('html,body').animate({
+	        scrolLTop: $(".cardDescription").offset().top + 500 },
+	        'slow');
+	    });
 	
 	  $(document).on('click', '.active', function(){
 	    $(this).removeClass('active');
