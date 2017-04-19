@@ -82,15 +82,16 @@
 	  //get trailers
 	  function getTrailerVideo(url) {
 	    $.getJSON(url, function(data) {
-	      console.log(data.results[0].key);
 	       trailerVideo = 'https://www.youtube.com/embed/'+ data.results[0].key;
-	    });
+	    })    
+	    .fail(function() { trailerVideo = 'https://www.youtube.com/embed/dQw4w9WgXcQ' });
 	  }
 	
 	  function displaySearchData(data){
-	    $.ajaxSetup({
-	    async: false
-	    });
+	    $('.loading').removeClass('hidden');
+	    // $.ajaxSetup({
+	    // async: false
+	    // });
 	  var emptyImage = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
 	  if (data.results) {
 	    data.results.forEach(function(item) {
@@ -140,13 +141,14 @@
 	        });
 	      }
 	    });
-	    $.ajaxSetup({
-	    async: true
-	});
+	//     $.ajaxSetup({
+	//     async: true
+	// });
 	  } else {
 	    resultElement += '<p> no results <p>';
 	    ('.js-search-results').append(resultElement);
-	    }
+	  }
+	  $('.loading').addClass('hidden');
 	  };
 	
 	  $(document).on('click','.movieCard', function(){
@@ -177,6 +179,7 @@
 	  function watchSubmit(){
 	    $('.js-search-form').submit(function(event){
 	      $('.js-search-results').empty();
+	      $('.loading').removeClass('hidden');
 	      event.preventDefault();
 	      var query = $(this).find('.js-query').val();
 	      getSearchDataFromApi(query, displaySearchData);

@@ -243,10 +243,10 @@ footer {
   background-color: #efefef;
   text-align: center;
 }
+.hidden {
+  display: none;
+}
 @media only screen and (max-width: 750px) {
-  body {
-    background-color: red;
-  }
   .cardDescription {
     width: 100%;
     left: 0;
@@ -257,24 +257,4 @@ footer {
     display: inline-block;
   }
 }
-/* ----------- iPhone 6 ----------- */
-/* Portrait and Landscape */
-/* Portrait */
-/* Landscape */
-/* ----------- iPhone 6+ ----------- */
-/* Portrait and Landscape */
-/* Portrait */
-/* Landscape */
-/* ----------- iPad mini ----------- */
-/* Portrait and Landscape */
-/* Portrait */
-/* Landscape */
-/* ----------- iPad 1 and 2 ----------- */
-/* Portrait and Landscape */
-/* Portrait */
-/* Landscape */
-/* ----------- iPad 3 and 4 ----------- */
-/* Portrait and Landscape */
-/* Portrait */
-/* Landscape */
 /*# sourceMappingURL=cinefilm.1.0.0.css.map */
