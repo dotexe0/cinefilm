@@ -89,9 +89,9 @@
 	
 	  function displaySearchData(data){
 	    $('.loading').removeClass('hidden');
-	    // $.ajaxSetup({
-	    // async: false
-	    // });
+	    $.ajaxSetup({
+	    async: false
+	    });
 	  var emptyImage = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
 	  if (data.results) {
 	    data.results.forEach(function(item) {
@@ -141,9 +141,9 @@
 	        });
 	      }
 	    });
-	//     $.ajaxSetup({
-	//     async: true
-	// });
+	    $.ajaxSetup({
+	    async: true
+	});
 	  } else {
 	    resultElement += '<p> no results <p>';
 	    ('.js-search-results').append(resultElement);
