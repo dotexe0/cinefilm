@@ -51,9 +51,9 @@
 	
 	  var OMDB_BASE_URL = "https://www.omdbapi.com/?t=";
 	  var GUIDE_BOX_API_KEY = 'rKqSP9tWheryWwVDGrdBaAZemausGy95';
-	  var GUIDE_BOX_BASE_URL = 'https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/search/movie/title/';
-	  var quota = $.getJSON('https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/quota', function(data){
-	  });
+	  var GUIDE_BOX_BASE_URL = 'https://api-public.guidebox.com/v2/search?api_key=' + GUIDE_BOX_API_KEY + '&type=movie&limit=10&field=title&precision=fuzzy&query=';
+	  // var quota = $.getJSON('https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/quota', function(data){
+	  // });
 	  var IMDB_URL = "https://www.imdb.com/title/";
 	  var ROTTEN_URL = "https://www.rottentomatoes.com/m/";
 	
@@ -65,7 +65,7 @@
 	
 	  //search any movie title
 	  function getSearchDataFromApi(searchTerm, callback) {
-	      var query = GUIDE_BOX_BASE_URL + searchTerm + '/fuzzy';
+	      var query = GUIDE_BOX_BASE_URL + searchTerm;
 	      $.getJSON(query, callback)
 	  };
 	
@@ -82,7 +82,12 @@
 	  //get trailers
 	  function getTrailerVideo(url) {
 	    $.getJSON(url, function(data) {
-	       trailerVideo = 'https://www.youtube.com/embed/'+ data.results[0].key;
+	      if (data.results.length  === 0 ) {
+	        var id = 'dQw4w9WgXcQ';
+	      } else {
+	        var id = data.results[0].key;
+	      }
+	       trailerVideo = 'https://www.youtube.com/embed/'+ id;
 	    })    
 	    .fail(function() { trailerVideo = 'https://www.youtube.com/embed/dQw4w9WgXcQ' });
 	  }
@@ -103,12 +108,17 @@
 	        //get movie details if image exists from api
 	        var movieID = 'https://api-public.guidebox.com/v1.43/US/' + GUIDE_BOX_API_KEY + '/movie/' + item.id;
 	        //grab individual elements from movies to display in dom
+	 
 	        $.getJSON(movieID, function(data){
 	          getTrailerVideo(trailerBaseURL);
 	
 	          var movieCard = '';
 	          var rated = data.rating;
-	          var genre = data.genres[0].title;
+	          if (data.genres.length === 0) {
+	            var genre = 'N/A';
+	          } else {
+	            var genre = data.genres[0].title
+	          }
 	          var movieDescription = data.overview;
 	          var imdbLink = IMDB_URL + data.imdb;
 	          getDataFromOMDB(data.imdb);
@@ -118,7 +128,11 @@
 	          var metaCritic = data.metacritic;
 	          // var trailerVideo = data.trailers.web[0].embed;
 	
-	          var watchLinks = data.purchase_web_sources[0].link;
+	          if (data.purchase_web_sources.length === 0) {
+	            var watchLinks = '#';
+	          } else {
+	            var watchLinks = data.purchase_web_sources[0].link;
+	          }
 	          var description =
 	            "<div class='cardDescription hidden'>" +
 	              "<h1 class='movie-title'>" + data.title + "</h1>" +
@@ -158,21 +172,23 @@
 	    $('.movieCard').hide();
 	    $('.active').show();
 	
-	    $(this).parent().find('.cardDescription').show(1000);    
+	    $(this).parent().find('.cardDescription').show();    
 	
-	    $(this).animate({
-	          left: '30px'
-	      }, 1000);
+	    // $(this).animate({
+	    //       left: '30px'
+	    //   }, 1000);
 	
-	      $('html,body').animate({
-	        scrolLTop: $(".cardDescription").offset().top + 500 },
-	        'slow');
+	      setTimeout(function() {
+	        $('html,body').animate({
+	        scrollTop: $(".cardDescription").offset().bottom },
+	        1000);
+	    }, 500);
+	
+	    $(document).on('click', '.active', function(){
+	      $(this).removeClass('active');
+	      $('.movieCard').show();
+	      $('.cardDescription').addClass('hidden');
 	    });
-	
-	  $(document).on('click', '.active', function(){
-	    $(this).removeClass('active');
-	    $('.movieCard').show();
-	    $('.cardDescription').addClass('hidden');
 	  });
 	
 	  //wait for a submit click

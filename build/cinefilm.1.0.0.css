@@ -100,7 +100,10 @@ a:after {
   color: white;
 }
 .movieContainer {
-  display: inline;
+  display: inline-block;
+  margin-right: 15px;
+  margin-bottom: -40px;
+  margin-top: -40px;
 }
 .movieCard {
   display: inline;
@@ -110,8 +113,7 @@ a:after {
   margin-right: 10px;
   margin-bottom: 10px;
   background: #A52630;
-  /*border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;*/
+  margin: 40px 25px 40px 0px;
 }
 img.movieCard:hover {
   cursor: pointer;
@@ -123,13 +125,10 @@ img.movieCard:hover {
   position: relative;
 }
 .active {
-  position: absolute;
   left: 300;
 }
 .cardDescription {
   color: white;
-  position: absolute;
-  left: 290px;
   height: 362px;
   width: 60%;
   margin-bottom: 60px;
@@ -140,8 +139,8 @@ img.movieCard:hover {
   border-style: solid;
   overflow: hidden;
   overflow-y: scroll;
-  /*border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;*/
+  margin: 40px auto;
+  display: inline-block;
 }
 ::-webkit-scrollbar {
   width: 0px;
@@ -252,9 +251,14 @@ footer {
     left: 0;
     height: inherit;
   }
+  .featherlight-content {
+    display: inline-flex !important;
+    max-width: 90% !important;
+  }
   img.movieCard.active {
     position: inherit !important;
     display: inline-block;
+    margin: 60px 0 auto auto;
   }
 }
 /*# sourceMappingURL=cinefilm.1.0.0.css.map */
