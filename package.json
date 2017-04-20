@@ -9,7 +9,7 @@
     "build": "npm run clean && npm run mkdir && npm run build:html && npm run build:css && npm run build:js",
     "watch": "npm run watch:html & npm run watch:css",
     "clean": "rm -rf build",
-    "build:html": "npm run clean:html && cp index.html build/ && cp movies.html build/ && cp images/film2.jpg build/ && cp featherlight-1.5.1/release/featherlight.min.js build/ && cp featherlight-1.5.1/release/featherlight.min.css build/",
+    "build:html": "npm run clean:html && cp index.html build/ && cp movies.html build/ && cp typed.js build/ && cp images/film2.jpg build/ && cp featherlight-1.5.1/release/featherlight.min.js build/ && cp featherlight-1.5.1/release/featherlight.min.css build/",
     "watch:html": "npm run build:html && chokidar index.html -c 'npm run build:html'",
     "clean:html": "rm -f build/index.html",
     "build:js": "npm run clean:js && webpack",

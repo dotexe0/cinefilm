@@ -1,7 +1,7 @@
 html {
-  background: url('./film2.jpg') no-repeat center center fixed;
-  background-image: url('./film2.jpg');
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url('./film2.jpg');
+  background: url('film2.jpg') no-repeat center center fixed;
+  background-image: url('film2.jpg');
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url('film2.jpg');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -113,7 +113,7 @@ a:after {
   margin-right: 10px;
   margin-bottom: 10px;
   background: #A52630;
-  margin: 40px 25px 40px 0px;
+  margin: 50px 25px 40px;
 }
 img.movieCard:hover {
   cursor: pointer;
@@ -259,6 +259,45 @@ footer {
     position: inherit !important;
     display: inline-block;
     margin: 60px 0 auto auto;
+  }
+}
+.typed-cursor {
+  opacity: 1;
+  -webkit-animation: blink 0.7s infinite;
+  -moz-animation: blink 0.7s infinite;
+  animation: blink 0.7s infinite;
+}
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 /*# sourceMappingURL=cinefilm.1.0.0.css.map */
