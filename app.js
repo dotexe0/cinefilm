@@ -125,10 +125,6 @@ $(document).ready(function() {
 
     $(this).parent().find('.cardDescription').show();    
 
-    // $(this).animate({
-    //       left: '30px'
-    //   }, 1000);
-
       setTimeout(function() {
         $('html,body').animate({
         scrollTop: $(".cardDescription").offset().bottom },
@@ -170,12 +166,3 @@ $(document).ready(function() {
   });
 });
 
-//load more content once you reach bottom of page
-// $(window).scroll(function() {
-//    if($(window).scrollTop() + $(window).height() == $(document).height()) {
-//       start = end + 1;
-//       end = start + 1;
-//       defaultDisplayData(start, end);
-//       displaySearchData();
-//    }
-// });
