@@ -46,32 +46,33 @@
 
 	$(document).ready(function() {
 	
-	  var OMDB_BASE_URL = "https://www.omdbapi.com/?t=";
-	  var GUIDE_BOX_API_KEY = 'rKqSP9tWheryWwVDGrdBaAZemausGy95';
-	  var GUIDE_BOX_BASE_URL = 'https://api-public.guidebox.com/v2/search?api_key=' + GUIDE_BOX_API_KEY + '&type=movie&limit=10&field=title&precision=fuzzy&query=';
-	  // var quota = $.getJSON('https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/quota', function(data){
+	  let OMDB_BASE_URL = "https://www.omdbapi.com/?t=";
+	  let THE_MOVIE_DB_API_KEY = '074c1de1f173b40ae75cddd1cebe2527';
+	  // let THE_MOVIE_DB_BASE_URL = `https://api.themoviedb.org/3/search/movie?api_key=${THE_MOVIE_DB_API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`;  // let GUIDE_BOX_API_KEY = 'rKqSP9tWheryWwVDGrdBaAZemausGy95';
+	  // let GUIDE_BOX_BASE_URL = 'https://api-public.guidebox.com/v2/search?api_key=' + GUIDE_BOX_API_KEY + '&type=movie&limit=10&field=title&precision=fuzzy&query=';
+	  // let quota = $.getJSON('https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/quota', function(data){
 	  // });
-	  var IMDB_URL = "https://www.imdb.com/title/";
-	  var ROTTEN_URL = "https://www.rottentomatoes.com/m/";
+	  let IMDB_URL = "https://www.imdb.com/title/";
+	  let ROTTEN_URL = "https://www.rottentomatoes.com/m/";
 	
 	  //display popular movies by default on main page
-	  function defaultDisplayData(start=0, end=11) {
-	    var movieSearchURL = 'https://api-public.guidebox.com/v1.43/us/' + GUIDE_BOX_API_KEY + '/movies/all/' + start +'/' + end;
-	    $.getJSON(movieSearchURL, displaySearchData)
+	  function defaultDisplayData() {
+	    let latestMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${THE_MOVIE_DB_API_KEY}&language=en-US`;
+	    $.getJSON(latestMovies, displaySearchData);
 	  }
 	
 	  //search any movie title
 	  function getSearchDataFromApi(searchTerm, callback) {
-	      var query = GUIDE_BOX_BASE_URL + searchTerm;
-	      $.getJSON(query, callback)
+	  let query = `https://api.themoviedb.org/3/search/movie?api_key=${THE_MOVIE_DB_API_KEY}&language=en-US&query=${searchTerm}&page=1&include_adult=false`
+	      $.getJSON(query, callback);
 	  };
 	
 	  //grab ratings from OMDB api call
-	  function getDataFromOMDB(imdbLink) {
-	    var search = OMDB_BASE_URL + imdbLink;
+	  function getMovieInfoByID(ID) {
+	    let search = `https://api.themoviedb.org/3/movie/${ID}?api_key=${THE_MOVIE_DB_API_KEY}&language=en-US`;
 	    $.getJSON(search, function(omdb){
 	      imdb_rating = omdb.imdbRating;
-	      var meta_rating = omdb.Metascore;
+	      let meta_rating = omdb.Metascore;
 	    });
 	  };
 	
@@ -80,9 +81,9 @@
 	  function getTrailerVideo(url) {
 	    $.getJSON(url, function(data) {
 	      if (data.results.length  === 0 ) {
-	        var id = 'dQw4w9WgXcQ';
+	        let id = 'dQw4w9WgXcQ';
 	      } else {
-	        var id = data.results[0].key;
+	        let id = data.results[0].key;
 	      }
 	       trailerVideo = 'https://www.youtube.com/embed/'+ id;
 	    })    
@@ -90,47 +91,48 @@
 	  }
 	
 	  function displaySearchData(data){
+	    console.log('initial data', data);
 	    $('.loading').removeClass('hidden');
-	    $.ajaxSetup({
-	    async: false
-	    });
-	  var emptyImage = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
+	    // $.ajaxSetup({
+	    // // async: false
+	    // });
+	  let emptyImage = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
 	  if (data.results) {
-	    data.results.forEach(function(item) {
-	
-	      var trailerBaseURL = 'https://api.themoviedb.org/3/movie/' + item.themoviedb +'/videos?api_key=074c1de1f173b40ae75cddd1cebe2527&language=en-US';
-	      var image = item.poster_240x342;
+	    data.results.forEach(function(movie) {
+	      console.log('data for search results', movie)
+	      let trailerBaseURL = 'https://api.themoviedb.org/3/movie/' + movie.themoviedb +'/videos?api_key=074c1de1f173b40ae75cddd1cebe2527&language=en-US';
+	      let image = `http://image.tmdb.org/t/p/w200${movie.poster_path}`;
 	      image = image.replace('http', 'https');
 	      if (image != emptyImage) {
 	        //get movie details if image exists from api
-	        var movieID = 'https://api-public.guidebox.com/v1.43/US/' + GUIDE_BOX_API_KEY + '/movie/' + item.id;
+	        let movieID = movie.id;
 	        //grab individual elements from movies to display in dom
 	 
 	        $.getJSON(movieID, function(data){
 	          getTrailerVideo(trailerBaseURL);
 	
-	          var movieCard = '';
-	          var rated = data.rating;
+	          let movieCard = '';
+	          let rated = data.rating;
 	          if (data.genres.length === 0) {
-	            var genre = 'N/A';
+	            let genre = 'N/A';
 	          } else {
-	            var genre = data.genres[0].title
+	            let genre = data.genres[0].title
 	          }
-	          var movieDescription = data.overview;
-	          var imdbLink = IMDB_URL + data.imdb;
-	          getDataFromOMDB(data.imdb);
+	          let movieDescription = data.overview;
+	          let imdbLink = IMDB_URL + data.imdb_id;
+	          getMovieInfoByID(data.imdb);
 	
-	          var rottenTomatoes = ROTTEN_URL + data.rottentomatoes;
-	          var commonSenseMedia = data.common_sense_media;
-	          var metaCritic = data.metacritic;
-	          // var trailerVideo = data.trailers.web[0].embed;
+	          let rottenTomatoes = ROTTEN_URL + data.rottentomatoes;
+	          let commonSenseMedia = data.common_sense_media;
+	          let metaCritic = data.metacritic;
+	          // let trailerVideo = data.trailers.web[0].embed;
 	
 	          if (data.purchase_web_sources.length === 0) {
-	            var watchLinks = '#';
+	            let watchLinks = '#';
 	          } else {
-	            var watchLinks = data.purchase_web_sources[0].link;
+	            let watchLinks = data.purchase_web_sources[0].link;
 	          }
-	          var description =
+	          let description =
 	            "<div class='cardDescription hidden'>" +
 	              "<h1 class='movie-title'>" + data.title + "</h1>" +
 	              "<h3 class='mpaa-rating'> Rated: " + rated +
@@ -152,11 +154,11 @@
 	        });
 	      }
 	    });
-	    $.ajaxSetup({
-	    async: true
-	});
+	//     $.ajaxSetup({
+	//     async: true
+	// });
 	  } else {
-	    resultElement += '<p> no results <p>';
+	    let resultElement = resultElement + '<p> no results <p>';
 	    ('.js-search-results').append(resultElement);
 	  }
 	  $('.loading').addClass('hidden');
@@ -190,7 +192,7 @@
 	      $('.js-search-results').empty();
 	      $('.loading').removeClass('hidden');
 	      event.preventDefault();
-	      var query = $(this).find('.js-query').val();
+	      let query = $(this).find('.js-query').val();
 	      getSearchDataFromApi(query, displaySearchData);
 	    });
 	  }
