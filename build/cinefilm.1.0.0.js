@@ -42,7 +42,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	$(document).ready(function() {
 	
@@ -171,10 +171,6 @@
 	
 	    $(this).parent().find('.cardDescription').show();    
 	
-	    // $(this).animate({
-	    //       left: '30px'
-	    //   }, 1000);
-	
 	      setTimeout(function() {
 	        $('html,body').animate({
 	        scrollTop: $(".cardDescription").offset().bottom },
@@ -216,16 +212,8 @@
 	  });
 	});
 	
-	//load more content once you reach bottom of page
-	// $(window).scroll(function() {
-	//    if($(window).scrollTop() + $(window).height() == $(document).height()) {
-	//       start = end + 1;
-	//       end = start + 1;
-	//       defaultDisplayData(start, end);
-	//       displaySearchData();
-	//    }
-	// });
 
-/***/ }
+
+/***/ })
 /******/ ]);
 //# sourceMappingURL=cinefilm.1.0.0.js.map

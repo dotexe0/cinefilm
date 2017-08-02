@@ -52,7 +52,7 @@ $(document).ready(function() {
   if (data.results) {
     data.results.forEach(function(item) {
 
-      var trailerBaseURL = 'https://api.themoviedb.org/3/movie/' + item.themoviedb +'/videos?api_key=074c1de1f173b40ae75cddd1cebe2527&language=en-US';
+      var trailerBaseURL = 'https://api.themoviedb.org/3/movie/' + item.themoviedb +'/videos?api_key=&language=en-US';
       var image = item.poster_240x342;
       image = image.replace('http', 'https');
       if (image != emptyImage) {

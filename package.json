@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "mkdir": "mkdir -p build",
+    "mkdir": "mkdir build",
     "build": "npm run clean && npm run mkdir && npm run build:html && npm run build:css && npm run build:js",
     "watch": "npm run watch:html & npm run watch:css",
     "clean": "rm -rf build",
@@ -18,12 +18,12 @@
     "build:css": "npm run build:css:unminified && npm run build:css:minified",
     "watch:css": "npm run watch:css:unminified & npm run watch:css:minified",
     "clean:css": "npm run clean:css:unminified && npm run clean:css:minified",
-    "build:css:unminified": "npm run clean:css:unminified && lessc --source-map css/index.less build/$npm_package_name.$npm_package_version.css",
+    "build:css:unminified": "npm run clean:css:unminified && lessc --source-map css/index.less build/cinefilm.1.0.0.css",
     "watch:css:unminified": "npm run build:css:unminified && chokidar 'css/**/*.(css|less)' -c 'npm run build:css:unminified'",
-    "clean:css:unminified": "rm -f build/$npm_package_name.$npm_package_version.css build/$npm_package_name.$npm_package_version.css.map",
-    "build:css:minified": "npm run clean:css:minified && lessc --clean-css --source-map css/index.less build/$npm_package_name.$npm_package_version.min.css",
+    "clean:css:unminified": "rm -f build/cinefilm.1.0.0.css build/cinefilm.1.0.0.css.map",
+    "build:css:minified": "npm run clean:css:minified && lessc --clean-css --source-map css/index.less build/cinefilm.1.0.0.min.css",
     "watch:css:minified": "npm run build:css:minified && chokidar 'css/**/*.(css|less)' -c 'npm run build:css:minified'",
-    "clean:css:minified": "rm -f build/$npm_package_name.$npm_package_version.min.css build/$npm_package_name.$npm_package_version.min.css.map"
+    "clean:css:minified": "rm -f build/cinefilm.1.0.0.min.css build/cinefilm.1.0.0.min.css.map"
   },
   "repository": {
     "type": "git",
