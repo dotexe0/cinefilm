@@ -3330,10 +3330,40 @@ $(document).ready(function () {
             case 0:
               search = "https://api.themoviedb.org/3/movie/" + ID + "?api_key=" + THE_MOVIE_DB_API_KEY + "&language=en-US";
               _context.next = 3;
-              return $.getJSON(search, function (data) {
-                console.log('get movie info by ID: ', data);
-                return data;
-              }).then(console.log('THEN!'));
+              return $.getJSON(search, function (movieData) {
+                console.log('get movie info by ID: ', movieData);
+                var title = movieData.original_title;
+                var image = "https://image.tmdb.org/t/p/w185" + movieData.poster_path;
+                var TRAILER_API_ENDPOINT = "https://api.themoviedb.org/3/movie/" + movieData.id + "/videos?api_key=074c1de1f173b40ae75cddd1cebe2527&language=en-US";
+                var trailerVideo = getTrailerVideo(TRAILER_API_ENDPOINT);
+                var rated = movieData.vote_average;
+                var genre = movieData.genres[0].name || 'N/A';
+                var imdbLink = "" + IMDB_URL + movieData.imdb_id;
+                var movieDescription = movieData.overview;
+                // , , , imdbLink, rottenTomatoes, metaCritic, description, watchLinks, 
+
+                var movieCard = '';
+
+                // var rottenTomatoes = ROTTEN_URL + movieData.rottentomatoes;
+                // var commonSenseMedia = movieData.common_sense_media;
+                // var metaCritic = movieData.metacritic;
+                // var trailerVideo = movieData.trailers.web[0].embed;
+
+                if (!movieData.homepage) {
+                  var watchLinks = '#';
+                } else {
+                  var watchLinks = movieData.homepage;
+                }
+
+                var description = "<div class='cardDescription hidden'>" + "<h1 class='movie-title'>" + movieData.original_title + "</h1>" + "<h3 class='mpaa-rating'> Rated: " + rated +
+                // "<a class='commonsense' target='_blank' title='Common Sense Media' href=" + commonSenseMedia + " ><i class='fa fa-check-circle-o' aria-hidden='true'></i></a><br>" +"</h3>" +
+                "<h5 class='genre'> Genre: " + genre + "</h5>" + "<div class='movieLinks'>" + "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe'>" + "<i class='fa fa-youtube-play fa-2x' aria-hidden='true'></i>" + "</a>" + "<a target='_blank' title='IMDB' href=" + imdbLink + "><i class='fa fa-imdb fa-2x' aria-hidden='true'></i></a>" +
+                // "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes +"><i class='fa fa-circle fa-2x' aria-hidden='true'></i></a>" +
+                // "<a target='_blank'  title='Metacritic' href=" + metaCritic +"><i class='fa fa-meetup fa-2x' aria-hidden='true'></i></a>" +
+                "</div>" + "<span class='movieText'>" + movieDescription + "</span><br>" + "<h5 class='watch'> Rent or Buy </h5>" + "<a target='_blank'  title='Rent/Buy' href=" + watchLinks + "><i class='fa fa-film fa-2x' aria-hidden='true'></i></a>" + "</div>";
+                movieCard = "<div class='movieContainer'><img class='movieCard' src=" + image + ">" + description + "</div>";
+                $('.js-search-results').append(movieCard);
+              }).then(console.log('title!'));
 
             case 3:
             case "end":
@@ -3395,7 +3425,7 @@ $(document).ready(function () {
     if (data.results) {
       data.results.forEach(function () {
         var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(movie) {
-          var movieData, trailerLink, video, image, movieCard, rated, genre, movieDescription, imdbLink, rottenTomatoes, commonSenseMedia, metaCritic, watchLinks, description;
+          var movieData;
           return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
@@ -3411,47 +3441,61 @@ $(document).ready(function () {
                   //get movie details if image exists from api
                   // var movieID = movieData.id;
 
-                  trailerLink = "https://api.themoviedb.org/3/movie/" + movie.id + "/videos?api_key=074c1de1f173b40ae75cddd1cebe2527&language=en-US";
-                  video = getTrailerVideo(trailerLink);
-                  image = "https://image.tmdb.org/t/p/w240" + movieData.poster_path;
-
+                  // var trailerLink = `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=074c1de1f173b40ae75cddd1cebe2527&language=en-US`;
+                  // var video = getTrailerVideo(trailerLink);
                   // var image = `https://image.tmdb.org/t/p/w240${movieData.poster_path}`;
 
                   // image = image.replace('http', 'https');
+
                   //FIX THIS -- will not run
+                  // if (image != emptyImage) {
 
-                  if (image != emptyImage) {
+                  //   //grab individual elements from movies to display in dom
+                  //   var movieCard = '';
+                  //   var rated = movieData.vote_average;
+                  //   if (!movieData.genres) {
+                  //     var genre = 'N/A';
+                  //   } else {
+                  //     var genre = movieData.genres[0].name
+                  //   }
+                  //   var movieDescription = movieData.overview;
+                  //   var imdbLink = IMDB_URL + movieData.imdb_id;
+                  //   // getMovieInfoByID(data.imdb);
 
-                    //grab individual elements from movies to display in dom
-                    movieCard = '';
-                    rated = movieData.vote_average;
+                  //   var rottenTomatoes = ROTTEN_URL + movieData.rottentomatoes;
+                  //   var commonSenseMedia = movieData.common_sense_media;
+                  //   var metaCritic = movieData.metacritic;
+                  //   // var trailerVideo = movieData.trailers.web[0].embed;
 
-                    if (!movieData.genres) {
-                      genre = 'N/A';
-                    } else {
-                      genre = movieData.genres[0].name;
-                    }
-                    movieDescription = movieData.overview;
-                    imdbLink = IMDB_URL + movieData.imdb_id;
-                    // getMovieInfoByID(data.imdb);
+                  //   if (!movieData.homepage) {
+                  //     var watchLinks = '#';
+                  //   } else {
+                  //     var watchLinks = movieData.homepage;
+                  //   }
 
-                    rottenTomatoes = ROTTEN_URL + movieData.rottentomatoes;
-                    commonSenseMedia = movieData.common_sense_media;
-                    metaCritic = movieData.metacritic;
-                    // var trailerVideo = movieData.trailers.web[0].embed;
 
-                    if (!movieData.homepage) {
-                      watchLinks = '#';
-                    } else {
-                      watchLinks = movieData.homepage;
-                    }
-                    description = "<div class='cardDescription hidden'>" + "<h1 class='movie-title'>" + movieData.original_title + "</h1>" + "<h3 class='mpaa-rating'> Rated: " + rated + "<a class='commonsense' target='_blank' title='Common Sense Media' href=" + commonSenseMedia + " ><i class='fa fa-check-circle-o' aria-hidden='true'></i></a><br>" + "</h3>" + "<h5 class='genre'> Genre: " + genre + "</h5>" + "<div class='movieLinks'>" + "<a href=" + video + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe'>" + "<i class='fa fa-youtube-play fa-2x' aria-hidden='true'></i>" + "</a>" + "<a target='_blank' title='IMDB' href=" + imdbLink + "><i class='fa fa-imdb fa-2x' aria-hidden='true'></i></a>" + "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes + "><i class='fa fa-circle fa-2x' aria-hidden='true'></i></a>" + "<a target='_blank'  title='Metacritic' href=" + metaCritic + "><i class='fa fa-meetup fa-2x' aria-hidden='true'></i></a>" + "</div>" + "<span class='movieText'>" + movieDescription + "</span><br>" + "<h5 class='watch'> Rent or Buy </h5>" + "<a target='_blank'  title='Rent/Buy' href=" + watchLinks + "><i class='fa fa-film fa-2x' aria-hidden='true'></i></a>" + "</div>";
+                  //   var description =
+                  //     "<div class='cardDescription hidden'>" +
+                  //       "<h1 class='movie-title'>" + movieData.original_title + "</h1>" +
+                  //       "<h3 class='mpaa-rating'> Rated: " + rated +
+                  //       "<a class='commonsense' target='_blank' title='Common Sense Media' href=" + commonSenseMedia + " ><i class='fa fa-check-circle-o' aria-hidden='true'></i></a><br>" +"</h3>" +
+                  //       "<h5 class='genre'> Genre: " + genre + "</h5>" +
+                  //       "<div class='movieLinks'>" +
+                  //       "<a href=" + video + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe'>"+
+                  //         "<i class='fa fa-youtube-play fa-2x' aria-hidden='true'></i>" +
+                  //         "</a>" +
+                  //         "<a target='_blank' title='IMDB' href=" + imdbLink + "><i class='fa fa-imdb fa-2x' aria-hidden='true'></i></a>" +
+                  //         "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes +"><i class='fa fa-circle fa-2x' aria-hidden='true'></i></a>" +
+                  //         "<a target='_blank'  title='Metacritic' href=" + metaCritic +"><i class='fa fa-meetup fa-2x' aria-hidden='true'></i></a>" +
+                  //       "</div>" +
+                  //       "<span class='movieText'>" + movieDescription + "</span><br>" +
+                  //       "<h5 class='watch'> Rent or Buy </h5>" + "<a target='_blank'  title='Rent/Buy' href=" + watchLinks +"><i class='fa fa-film fa-2x' aria-hidden='true'></i></a>" +
+                  //     "</div>";
+                  //     movieCard = "<div class='movieContainer'><img class='movieCard' src=" + image + ">" + description + "</div>";
+                  //   $('.js-search-results').append(movieCard);
+                  // };
 
-                    movieCard = "<div class='movieContainer'><img class='movieCard' src=" + image + ">" + description + "</div>";
-                    $('.js-search-results').append(movieCard);
-                  };
-
-                case 9:
+                case 4:
                 case "end":
                   return _context2.stop();
               }
