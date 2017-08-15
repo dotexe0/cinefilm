@@ -55,10 +55,6 @@ $(document).ready(function() {
         // var trailerVideo = getTrailerVideo(TRAILER_API_ENDPOINT);
                       // , , , imdbLink, rottenTomatoes, metaCritic, description, watchLinks, 
         var movieCard = '';
-        // var rottenTomatoes = ROTTEN_URL + movieData.rottentomatoes;
-        // var commonSenseMedia = movieData.common_sense_media;
-        // var metaCritic = movieData.metacritic;
-        // var trailerVideo = movieData.trailers.web[0].embed;
         if (!movieData.homepage) {
           var watchLinks = '#';
         } else {
@@ -72,7 +68,7 @@ $(document).ready(function() {
       }
       if (trailerData) {
         console.log('API 2 worked');        
-        let id = trailerData.results[0].key || 'dQw4w9WgXcQ';
+        let id = trailerData.results[0] ? trailerData.results[0].key : 'dQw4w9WgXcQ';
         var trailerVideo = `https://www.youtube.com/embed/${id}`;
         var description =
         "<div class='cardDescription hidden'>" +
