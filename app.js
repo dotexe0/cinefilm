@@ -26,13 +26,11 @@ $(document).ready(function() {
       //first API  call to movieDB for data by ID
       $.getJSON(search, function(data) {
         movieData = data;
-        console.log('movie data by ID: ', movieData);
         TRAILER_API_ENDPOINT = `https://api.themoviedb.org/3/movie/${movieData.id}/videos?api_key=074c1de1f173b40ae75cddd1cebe2527&language=en-US`;
       })
       .then(function() {
         $.getJSON(TRAILER_API_ENDPOINT, function(data) {
           trailerData = data;
-          console.log('trailer', data);
         })
       }),
       
@@ -52,7 +50,6 @@ $(document).ready(function() {
         console.log('API 1 didnt worked');
       }
       if (trailerData) {
-        console.log('API 2 worked');        
         let id = trailerData.results[0] ? trailerData.results[0].key : 'dQw4w9WgXcQ';
         var trailerVideo = `https://www.youtube.com/embed/${id}`;
         var description =
@@ -74,13 +71,12 @@ $(document).ready(function() {
       } else {
         let id = 'dQw4w9WgXcQ';
         var trailerVideo = `https://www.youtube.com/embed/${id}`;
-        console.log('did not work api2');
+        console.log('trailerAPICall error');
       }
       });     
   };
 
   function displaySearchData(data){
-    console.log('initial data', data);
     $('.loading').removeClass('hidden');
 
     let emptyImage = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';

@@ -3359,12 +3359,10 @@ $(document).ready(function () {
               //first API  call to movieDB for data by ID
               $.getJSON(search, function (data) {
                 movieData = data;
-                console.log('movie data by ID: ', movieData);
                 TRAILER_API_ENDPOINT = "https://api.themoviedb.org/3/movie/" + movieData.id + "/videos?api_key=074c1de1f173b40ae75cddd1cebe2527&language=en-US";
               }).then(function () {
                 $.getJSON(TRAILER_API_ENDPOINT, function (data) {
                   trailerData = data;
-                  console.log('trailer', data);
                 });
               })).then(function () {
                 if (movieData) {
@@ -3381,7 +3379,6 @@ $(document).ready(function () {
                   console.log('API 1 didnt worked');
                 }
                 if (trailerData) {
-                  console.log('API 2 worked');
                   var id = trailerData.results[0] ? trailerData.results[0].key : 'dQw4w9WgXcQ';
                   var trailerVideo = "https://www.youtube.com/embed/" + id;
                   var description = "<div class='cardDescription hidden'>" + "<h1 class='movie-title'>" + movieData.original_title + "</h1>" + "<h3 class='mpaa-rating'> Average Rating: " + rated + "<h5 class='genre'> Genre: " + genre + "</h5>" + "<div class='movieLinks'>" + "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe'>" + "<i class='fa fa-youtube-play fa-3x' aria-hidden='true'></i>" + "</a>" + "<a target='_blank' title='IMDB' href=" + imdbLink + "><i class='fa fa-imdb fa-3x' aria-hidden='true'></i></a>" + "</div>" + "<span class='movieText'>" + movieDescription + "</span><br>" + "<h5 class='watch'> Movie Homepage </h5>" + "<a target='_blank'  title='Homepage' href=" + homepage + "><i class='fa fa-film fa-2x' aria-hidden='true'></i></a>" + "</div>";
@@ -3390,7 +3387,7 @@ $(document).ready(function () {
                 } else {
                   var _id = 'dQw4w9WgXcQ';
                   var trailerVideo = "https://www.youtube.com/embed/" + _id;
-                  console.log('did not work api2');
+                  console.log('trailerAPICall error');
                 }
               });
 
@@ -3418,7 +3415,6 @@ $(document).ready(function () {
   };;
 
   function displaySearchData(data) {
-    console.log('initial data', data);
     $('.loading').removeClass('hidden');
 
     var emptyImage = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
