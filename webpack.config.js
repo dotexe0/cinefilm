@@ -12,5 +12,19 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         filename: filename.join('.'),
     },
-    devtool: 'source-map'
+    devtool: 'source-map',
+    module: {
+        loaders: [
+        {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+            loader: 'babel-loader',
+            options: {
+            presets: ['env']
+            }
+        }
+        }
+    ]
+    }
 }
