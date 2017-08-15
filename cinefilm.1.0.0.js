@@ -3329,10 +3329,10 @@ $(document).ready(function () {
           switch (_context.prev = _context.next) {
             case 0:
               query = "https://api.themoviedb.org/3/search/movie?api_key=" + THE_MOVIE_DB_API_KEY + "&language=en-US&query=" + searchTerm + "&page=1&include_adult=false";
-              _context.next = 3;
-              return $.getJSON(query, callback);
 
-            case 3:
+              $.getJSON(query, callback);
+
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -3394,7 +3394,7 @@ $(document).ready(function () {
                 }
                 if (trailerData) {
                   console.log('API 2 worked');
-                  var id = trailerData.results[0].key || 'dQw4w9WgXcQ';
+                  var id = trailerData.results[0] ? trailerData.results[0].key : 'dQw4w9WgXcQ';
                   var trailerVideo = "https://www.youtube.com/embed/" + id;
                   var description = "<div class='cardDescription hidden'>" + "<h1 class='movie-title'>" + movieData.original_title + "</h1>" + "<h3 class='mpaa-rating'> Avg. Rating: " + rated +
                   // "<a class='commonsense' target='_blank' title='Common Sense Media' href=" + commonSenseMedia + " ><i class='fa fa-check-circle-o' aria-hidden='true'></i></a><br>" +"</h3>" +
