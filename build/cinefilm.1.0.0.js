@@ -3320,50 +3320,17 @@ __webpack_require__(117);
 
 $(document).ready(function () {
 
-  //grab more data by movie id api call
-  var getMovieInfoByID = function () {
-    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(ID) {
-      var search;
+  //search any movie title
+  var getSearchDataFromApi = function () {
+    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(searchTerm, callback) {
+      var query;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              search = "https://api.themoviedb.org/3/movie/" + ID + "?api_key=" + THE_MOVIE_DB_API_KEY + "&language=en-US";
+              query = "https://api.themoviedb.org/3/search/movie?api_key=" + THE_MOVIE_DB_API_KEY + "&language=en-US&query=" + searchTerm + "&page=1&include_adult=false";
               _context.next = 3;
-              return $.getJSON(search, function (movieData) {
-                console.log('get movie info by ID: ', movieData);
-                var title = movieData.original_title;
-                var image = "https://image.tmdb.org/t/p/w185" + movieData.poster_path;
-                var TRAILER_API_ENDPOINT = "https://api.themoviedb.org/3/movie/" + movieData.id + "/videos?api_key=074c1de1f173b40ae75cddd1cebe2527&language=en-US";
-                var trailerVideo = getTrailerVideo(TRAILER_API_ENDPOINT);
-                var rated = movieData.vote_average;
-                var genre = movieData.genres[0].name || 'N/A';
-                var imdbLink = "" + IMDB_URL + movieData.imdb_id;
-                var movieDescription = movieData.overview;
-                // , , , imdbLink, rottenTomatoes, metaCritic, description, watchLinks, 
-
-                var movieCard = '';
-
-                // var rottenTomatoes = ROTTEN_URL + movieData.rottentomatoes;
-                // var commonSenseMedia = movieData.common_sense_media;
-                // var metaCritic = movieData.metacritic;
-                // var trailerVideo = movieData.trailers.web[0].embed;
-
-                if (!movieData.homepage) {
-                  var watchLinks = '#';
-                } else {
-                  var watchLinks = movieData.homepage;
-                }
-
-                var description = "<div class='cardDescription hidden'>" + "<h1 class='movie-title'>" + movieData.original_title + "</h1>" + "<h3 class='mpaa-rating'> Rated: " + rated +
-                // "<a class='commonsense' target='_blank' title='Common Sense Media' href=" + commonSenseMedia + " ><i class='fa fa-check-circle-o' aria-hidden='true'></i></a><br>" +"</h3>" +
-                "<h5 class='genre'> Genre: " + genre + "</h5>" + "<div class='movieLinks'>" + "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe'>" + "<i class='fa fa-youtube-play fa-2x' aria-hidden='true'></i>" + "</a>" + "<a target='_blank' title='IMDB' href=" + imdbLink + "><i class='fa fa-imdb fa-2x' aria-hidden='true'></i></a>" +
-                // "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes +"><i class='fa fa-circle fa-2x' aria-hidden='true'></i></a>" +
-                // "<a target='_blank'  title='Metacritic' href=" + metaCritic +"><i class='fa fa-meetup fa-2x' aria-hidden='true'></i></a>" +
-                "</div>" + "<span class='movieText'>" + movieDescription + "</span><br>" + "<h5 class='watch'> Rent or Buy </h5>" + "<a target='_blank'  title='Rent/Buy' href=" + watchLinks + "><i class='fa fa-film fa-2x' aria-hidden='true'></i></a>" + "</div>";
-                movieCard = "<div class='movieContainer'><img class='movieCard' src=" + image + ">" + description + "</div>";
-                $('.js-search-results').append(movieCard);
-              }).then(console.log('title!'));
+              return $.getJSON(query, callback);
 
             case 3:
             case "end":
@@ -3373,8 +3340,87 @@ $(document).ready(function () {
       }, _callee, this);
     }));
 
-    return function getMovieInfoByID(_x) {
+    return function getSearchDataFromApi(_x, _x2) {
       return _ref.apply(this, arguments);
+    };
+  }();
+
+  //grab more data by movie id api call
+  var getMovieInfoByID = function () {
+    var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(ID) {
+      var search, movieData, trailerData, TRAILER_API_ENDPOINT;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              search = "https://api.themoviedb.org/3/movie/" + ID + "?api_key=" + THE_MOVIE_DB_API_KEY + "&language=en-US";
+
+              $.when(
+              //first API  call to movieDB for data by ID
+              $.getJSON(search, function (data) {
+                movieData = data;
+                console.log('movie data by ID: ', movieData);
+                TRAILER_API_ENDPOINT = "https://api.themoviedb.org/3/movie/" + movieData.id + "/videos?api_key=074c1de1f173b40ae75cddd1cebe2527&language=en-US";
+              }).then(function () {
+                $.getJSON(TRAILER_API_ENDPOINT, function (data) {
+                  trailerData = data;
+                  console.log('trailer', data);
+                });
+              })).then(function () {
+                if (movieData) {
+                  console.log('first api called');
+                  var title = movieData.original_title;
+                  var image = "https://image.tmdb.org/t/p/w185" + movieData.poster_path;
+
+                  var rated = movieData.vote_average;
+                  var genre = movieData.genres[0] ? movieData.genres[0].name : 'N/A';
+                  var imdbLink = "" + IMDB_URL + movieData.imdb_id;
+                  var movieDescription = movieData.overview;
+                  // var trailerVideo = getTrailerVideo(TRAILER_API_ENDPOINT);
+                  // , , , imdbLink, rottenTomatoes, metaCritic, description, watchLinks, 
+                  var movieCard = '';
+                  // var rottenTomatoes = ROTTEN_URL + movieData.rottentomatoes;
+                  // var commonSenseMedia = movieData.common_sense_media;
+                  // var metaCritic = movieData.metacritic;
+                  // var trailerVideo = movieData.trailers.web[0].embed;
+                  if (!movieData.homepage) {
+                    var watchLinks = '#';
+                  } else {
+                    var watchLinks = movieData.homepage;
+                  }
+                } else {
+                  //errror on first api call
+                  console.log('API 1 didnt worked');
+                }
+                if (trailerData) {
+                  console.log('API 2 worked');
+                  var id = trailerData.results[0].key || 'dQw4w9WgXcQ';
+                  var trailerVideo = "https://www.youtube.com/embed/" + id;
+                  var description = "<div class='cardDescription hidden'>" + "<h1 class='movie-title'>" + movieData.original_title + "</h1>" + "<h3 class='mpaa-rating'> Avg. Rating: " + rated +
+                  // "<a class='commonsense' target='_blank' title='Common Sense Media' href=" + commonSenseMedia + " ><i class='fa fa-check-circle-o' aria-hidden='true'></i></a><br>" +"</h3>" +
+                  "<h5 class='genre'> Genre: " + genre + "</h5>" + "<div class='movieLinks'>" + "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe'>" + "<i class='fa fa-youtube-play fa-2x' aria-hidden='true'></i>" + "</a>" + "<a target='_blank' title='IMDB' href=" + imdbLink + "><i class='fa fa-imdb fa-2x' aria-hidden='true'></i></a>" +
+                  // "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes +"><i class='fa fa-circle fa-2x' aria-hidden='true'></i></a>" +
+                  // "<a target='_blank'  title='Metacritic' href=" + metaCritic +"><i class='fa fa-meetup fa-2x' aria-hidden='true'></i></a>" +
+                  "</div>" + "<span class='movieText'>" + movieDescription + "</span><br>" + "<h5 class='watch'> Rent or Buy </h5>" + "<a target='_blank'  title='Rent/Buy' href=" + watchLinks + "><i class='fa fa-film fa-2x' aria-hidden='true'></i></a>" + "</div>";
+                  movieCard = "<div class='movieContainer'><img class='movieCard' src=" + image + ">" + description + "</div>";
+                  $('.js-search-results').append(movieCard);
+                } else {
+                  var _id = 'dQw4w9WgXcQ';
+                  var trailerVideo = "https://www.youtube.com/embed/" + _id;
+                  console.log('did not work api2');
+                }
+              });
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this);
+    }));
+
+    return function getMovieInfoByID(_x3) {
+      return _ref2.apply(this, arguments);
     };
   }();
 
@@ -3391,12 +3437,6 @@ $(document).ready(function () {
   function defaultDisplayData() {
     var latestMovies = "https://api.themoviedb.org/3/movie/popular?api_key=" + THE_MOVIE_DB_API_KEY + "&language=en-US";
     $.getJSON(latestMovies, displaySearchData);
-  }
-
-  //search any movie title
-  function getSearchDataFromApi(searchTerm, callback) {
-    var query = "https://api.themoviedb.org/3/search/movie?api_key=" + THE_MOVIE_DB_API_KEY + "&language=en-US&query=" + searchTerm + "&page=1&include_adult=false";
-    $.getJSON(query, callback);
   };;
 
   //get trailers
@@ -3408,108 +3448,29 @@ $(document).ready(function () {
         var trailerVideo = "https://www.youtube.com/embed/" + id;
         return trailerVideo;
       } else {
-        var _id = data.results[0].key;
-        var _trailerVideo = "https://www.youtube.com/embed/" + _id;
+        var _id2 = data.results[0].key;
+        var _trailerVideo = "https://www.youtube.com/embed/" + _id2;
         return _trailerVideo;
       }
+    }).done(function (data) {
+      return console.log('data');
     }).fail(function () {
       var trailerVideo = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
     });
   }
 
   function displaySearchData(data) {
-    // console.log('initial data', data);
+    console.log('initial data', data);
     $('.loading').removeClass('hidden');
 
     var emptyImage = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
-    if (data.results) {
-      data.results.forEach(function () {
-        var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(movie) {
-          var movieData;
-          return regeneratorRuntime.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  _context2.next = 2;
-                  return getMovieInfoByID(movie.id);
-
-                case 2:
-                  movieData = _context2.sent;
-
-                  console.log('single data: ', movieData);
-                  // $.getJSON(movieID, function(data) {
-                  //get movie details if image exists from api
-                  // var movieID = movieData.id;
-
-                  // var trailerLink = `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=074c1de1f173b40ae75cddd1cebe2527&language=en-US`;
-                  // var video = getTrailerVideo(trailerLink);
-                  // var image = `https://image.tmdb.org/t/p/w240${movieData.poster_path}`;
-
-                  // image = image.replace('http', 'https');
-
-                  //FIX THIS -- will not run
-                  // if (image != emptyImage) {
-
-                  //   //grab individual elements from movies to display in dom
-                  //   var movieCard = '';
-                  //   var rated = movieData.vote_average;
-                  //   if (!movieData.genres) {
-                  //     var genre = 'N/A';
-                  //   } else {
-                  //     var genre = movieData.genres[0].name
-                  //   }
-                  //   var movieDescription = movieData.overview;
-                  //   var imdbLink = IMDB_URL + movieData.imdb_id;
-                  //   // getMovieInfoByID(data.imdb);
-
-                  //   var rottenTomatoes = ROTTEN_URL + movieData.rottentomatoes;
-                  //   var commonSenseMedia = movieData.common_sense_media;
-                  //   var metaCritic = movieData.metacritic;
-                  //   // var trailerVideo = movieData.trailers.web[0].embed;
-
-                  //   if (!movieData.homepage) {
-                  //     var watchLinks = '#';
-                  //   } else {
-                  //     var watchLinks = movieData.homepage;
-                  //   }
-
-
-                  //   var description =
-                  //     "<div class='cardDescription hidden'>" +
-                  //       "<h1 class='movie-title'>" + movieData.original_title + "</h1>" +
-                  //       "<h3 class='mpaa-rating'> Rated: " + rated +
-                  //       "<a class='commonsense' target='_blank' title='Common Sense Media' href=" + commonSenseMedia + " ><i class='fa fa-check-circle-o' aria-hidden='true'></i></a><br>" +"</h3>" +
-                  //       "<h5 class='genre'> Genre: " + genre + "</h5>" +
-                  //       "<div class='movieLinks'>" +
-                  //       "<a href=" + video + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe'>"+
-                  //         "<i class='fa fa-youtube-play fa-2x' aria-hidden='true'></i>" +
-                  //         "</a>" +
-                  //         "<a target='_blank' title='IMDB' href=" + imdbLink + "><i class='fa fa-imdb fa-2x' aria-hidden='true'></i></a>" +
-                  //         "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes +"><i class='fa fa-circle fa-2x' aria-hidden='true'></i></a>" +
-                  //         "<a target='_blank'  title='Metacritic' href=" + metaCritic +"><i class='fa fa-meetup fa-2x' aria-hidden='true'></i></a>" +
-                  //       "</div>" +
-                  //       "<span class='movieText'>" + movieDescription + "</span><br>" +
-                  //       "<h5 class='watch'> Rent or Buy </h5>" + "<a target='_blank'  title='Rent/Buy' href=" + watchLinks +"><i class='fa fa-film fa-2x' aria-hidden='true'></i></a>" +
-                  //     "</div>";
-                  //     movieCard = "<div class='movieContainer'><img class='movieCard' src=" + image + ">" + description + "</div>";
-                  //   $('.js-search-results').append(movieCard);
-                  // };
-
-                case 4:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2, this);
-        }));
-
-        return function (_x2) {
-          return _ref2.apply(this, arguments);
-        };
-      }());
+    if (data.results.length > 0) {
+      data.results.forEach(function (movie) {
+        var movieData = getMovieInfoByID(movie.id);
+      });
     } else {
       var resultElement = '<p> no results <p>';
-      '.js-search-results'.append(resultElement);
+      $('.js-search-results').append(resultElement);
     }
     $('.loading').addClass('hidden');
   };
