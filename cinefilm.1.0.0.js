@@ -3388,6 +3388,8 @@ $(document).ready(function () {
                   var _id = 'dQw4w9WgXcQ';
                   var trailerVideo = "https://www.youtube.com/embed/" + _id;
                   console.log('trailerAPICall error');
+                  var error = "<div class='error'>" + "<h3>An Error occured. Please try again.</h3>" + "</div>";
+                  $('.js-search-results').append(error);
                 }
               });
 
